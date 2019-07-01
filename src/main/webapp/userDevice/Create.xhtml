@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateUserDeviceTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateUserDeviceLabel_id}" for="id" rendered="false"/>
+                    <h:inputText id="id" value="#{userDeviceController.selected.id}" title="#{bundle.CreateUserDeviceTitle_id}" required="false" requiredMessage="#{bundle.CreateUserDeviceRequiredMessage_id}" rendered="false"/>
+                    <h:outputLabel value="#{bundle.CreateUserDeviceLabel_deviceId}" for="deviceId" />
+                    <h:selectOneMenu id="deviceId" value="#{userDeviceController.selected.deviceId}" title="#{bundle.CreateUserDeviceTitle_deviceId}" required="true" requiredMessage="#{bundle.CreateUserDeviceRequiredMessage_deviceId}">
+                        <f:selectItems value="#{deviceController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateUserDeviceLabel_userId}" for="userId" />
+                    <h:selectOneMenu id="userId" value="#{userDeviceController.selected.userId}" title="#{bundle.CreateUserDeviceTitle_userId}" required="true" requiredMessage="#{bundle.CreateUserDeviceRequiredMessage_userId}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{userDeviceController.create}" value="#{bundle.CreateUserDeviceSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{userDeviceController.prepareList}" value="#{bundle.CreateUserDeviceShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateUserDeviceIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
